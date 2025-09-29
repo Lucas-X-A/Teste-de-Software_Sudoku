@@ -80,20 +80,20 @@ public class G2_Sudoku_nok {
     
     /**
      * Verifica se uma coluna contém todos os números de 1 a 9 sem repetição
-     * BUG: Não detecta duplicatas corretamente
+     * BUG: Ignora o último elemento da coluna na verificação
      */
     private static boolean isValidColumn(int[][] sudoku, int col) {
         boolean[] seen = new boolean[10]; // índices 1-9 usados
         
-        for (int row = 0; row < 9; row++) {
+        // BUG: loop vai até 8 em vez de 9, ignorando o último elemento
+        for (int row = 0; row < 8; row++) {
             int num = sudoku[row][col];
-            if (num < 1 || num > 9) {
+            if (num < 1 || num > 9 || seen[num]) {
                 return false;
             }
-            // BUG: Não marca o número como visto, permitindo duplicatas
-            // seen[num] = true; // Esta linha está comentada intencionalmente
+            seen[num] = true;
         }
-        return true; // Sempre retorna true se os números estão no range 1-9
+        return true;
     }
     
     /**
