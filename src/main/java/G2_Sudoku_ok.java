@@ -49,7 +49,7 @@ public class G2_Sudoku_ok {
                 String line;
                 int row = 0;
                 while ((line = br.readLine()) != null && row < 9) {
-                    String[] values = line.split(", "); 
+                    String[] values = line.split(",\\s*");
                     for (int col = 0; col < 9; col++) {
                         // Remove espaços de cada número individualmente antes de converter
                         board[row][col] = Integer.parseInt(values[col].trim());
