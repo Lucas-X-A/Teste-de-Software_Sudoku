@@ -10,7 +10,8 @@
  */
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,21 +21,23 @@ public class G2_Sudoku_nok {
     private final int[][] board = new int[9][9];
 
     /**
-     * Construtor que lê um tabuleiro de Sudoku de um arquivo de texto.
-     * @param filePath O caminho para o arquivo de texto contendo o tabuleiro.
+     * Construtor que lê um tabuleiro de Sudoku de um arquivo de recurso.
+     * @param resourcePath O caminho para o arquivo de recurso contendo o tabuleiro.
      */
-    public G2_Sudoku_nok(String filePath) {
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+    public G2_Sudoku_nok(String resourcePath) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream(resourcePath);
+             BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
             String line;
             int row = 0;
             while ((line = br.readLine()) != null && row < 9) {
-                String[] values = line.split(",\\s*");
+                String[] values = line.trim().split(",\\s*|\\s+");
                 for (int col = 0; col < 9; col++) {
                     board[row][col] = Integer.parseInt(values[col]);
                 }
                 row++;
             }
-        } catch (IOException | NumberFormatException e) {
+        } catch (IOException | NullPointerException | NumberFormatException e) {
+            System.err.println("Erro ao ler o tabuleiro do recurso: " + resourcePath);
             e.printStackTrace();
         }
     }
