@@ -49,9 +49,10 @@ public class G2_Sudoku_ok {
                 String line;
                 int row = 0;
                 while ((line = br.readLine()) != null && row < 9) {
-                    String[] values = line.trim().split(",\\s*|\\s+");
+                    String[] values = line.split(", "); 
                     for (int col = 0; col < 9; col++) {
-                        board[row][col] = Integer.parseInt(values[col]);
+                        // Remove espaços de cada número individualmente antes de converter
+                        board[row][col] = Integer.parseInt(values[col].trim());
                     }
                     row++;
                 }
@@ -115,11 +116,15 @@ public class G2_Sudoku_ok {
     private boolean isSetValid(int[] data) {
         Set<Integer> seen = new HashSet<>();
         for (int num : data) {
-            // Assumindo que o tabuleiro está bem formado (números de 1 a 9)
-            if (!seen.add(num)) {
-                return false; // Encontrou um duplicado
+            // Ignora zeros, que podem indicar um tabuleiro não preenchido ou erro de leitura.
+            if (num == 0) continue; 
+
+            // Verifica se o número está fora do intervalo válido [1,9] ou se é um duplicado.
+            if (num < 1 || num > 9 || !seen.add(num)) {
+                return false;
             }
         }
-        return seen.size() == 9;
+        // Se o loop terminar, significa que não há duplicatas ou números inválidos.
+        return true;
     }
 }
