@@ -13,6 +13,7 @@
  */
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
@@ -24,24 +25,42 @@ public class G2_Sudoku_ok {
     private final int[][] board = new int[9][9];
 
     /**
-     * Construtor que lê um tabuleiro de Sudoku de um arquivo de recurso.
-     * @param resourcePath O caminho para o arquivo de recurso contendo o tabuleiro.
+     * Construtor que lê um tabuleiro de Sudoku.
+     * @param path O caminho para o arquivo do tabuleiro.
      */
-    public G2_Sudoku_ok(String resourcePath) {
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream(resourcePath);
-             BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-            String line;
-            int row = 0;
-            while ((line = br.readLine()) != null && row < 9) {
-                String[] values = line.trim().split(",\\s*|\\s+");
-                for (int col = 0; col < 9; col++) {
-                    board[row][col] = Integer.parseInt(values[col]);
-                }
-                row++;
+    public G2_Sudoku_ok(String path) {
+        InputStream inputStream = null;
+
+        // 1. Tenta carregar como recurso (para estrutura Maven)
+        inputStream = getClass().getClassLoader().getResourceAsStream(path);
+
+        // 2. Se não encontrou como recurso, tenta como arquivo direto (para estrutura simples)
+        if (inputStream == null) {
+            try {
+                inputStream = new FileInputStream(path);
+            } catch (IOException e) {
+                // Ignora o erro aqui, o próximo passo vai tratar o inputStream nulo
             }
-        } catch (IOException | NullPointerException | NumberFormatException e) {
-            System.err.println("Erro ao ler o tabuleiro do recurso: " + resourcePath);
-            e.printStackTrace();
+        }
+
+        // 3. Se o arquivo foi encontrado de alguma forma, processa. Senão, lança erro.
+        if (inputStream != null) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+                String line;
+                int row = 0;
+                while ((line = br.readLine()) != null && row < 9) {
+                    String[] values = line.trim().split(",\\s*|\\s+");
+                    for (int col = 0; col < 9; col++) {
+                        board[row][col] = Integer.parseInt(values[col]);
+                    }
+                    row++;
+                }
+            } catch (IOException | NumberFormatException e) {
+                System.err.println("Erro ao processar o tabuleiro: " + path);
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Não foi possível encontrar o arquivo do tabuleiro em lugar nenhum: " + path);
         }
     }
 
