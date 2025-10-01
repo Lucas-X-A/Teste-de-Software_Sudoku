@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Teste_2 {
 
-    private static final String CAMINHO_VALIDO = "2_solucao1_sim.txt";
-    private static final String CAMINHO_INVALIDO = "2_solucao1_nao.txt";
-    private static final String CAMINHO_INVALIDO_ULTIMA_COLUNA = "2_solucao2_nao.txt";
+    private static final String CAMINHO_VALIDO = "../resources/2_solucao1_sim.txt";
+    private static final String CAMINHO_INVALIDO = "../resources/2_solucao1_nao.txt";
+    private static final String CAMINHO_INVALIDO_ULTIMA_COLUNA = "../resources/2_solucao2_nao.txt";
 
     // --- Testes para a classe G2_Sudoku_ok (Implementação Correta) ---
 
