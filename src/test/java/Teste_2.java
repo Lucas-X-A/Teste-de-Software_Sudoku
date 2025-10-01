@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Teste_2 {
 
-    private static final String CAMINHO_VALIDO = "../resources/2_solucao1_sim.txt";
-    private static final String CAMINHO_INVALIDO = "../resources/2_solucao1_nao.txt";
-    private static final String CAMINHO_INVALIDO_ULTIMA_COLUNA = "../resources/2_solucao2_nao.txt";
+    private static final String CAMINHO_VALIDO = "2_solucao1_sim.txt";
+    private static final String CAMINHO_INVALIDO = "2_solucao1_nao.txt";
+    private static final String CAMINHO_INVALIDO_ULTIMA_COLUNA = "2_solucao2_nao.txt";
 
-    // --- Testes para a classe G2_Sudoku_ok (Implementação Correta) ---
+    // --- Testes para a classe G2_Sudoku_ok ---
 
     @Test
     @DisplayName("G2_Sudoku_ok: Deve retornar true para um Sudoku válido")
@@ -32,7 +32,7 @@ public class Teste_2 {
     }
 
 
-    // --- Testes para a classe G2_Sudoku_nok (Implementação com Erro) ---
+    // --- Testes para a classe G2_Sudoku_nok ---
 
     @Test
     @DisplayName("G2_Sudoku_nok: Deve retornar true para um Sudoku válido")
@@ -52,8 +52,6 @@ public class Teste_2 {
     @DisplayName("G2_Sudoku_nok: [FALHA ESPERADA] Deve retornar true para um Sudoku com erro apenas na última coluna")
     void testeSudokuNokComErroNaoDetectado() {
         G2_Sudoku_nok sudoku = new G2_Sudoku_nok(CAMINHO_INVALIDO_ULTIMA_COLUNA);
-        // Este teste irá FALHAR, expondo o bug.
-        // A asserção espera 'false' (inválido), mas a classe com bug retornará 'true' (válido).
         assertFalse(sudoku.valido(), "Este teste deve falhar para demonstrar o bug na validação da última coluna.");
     }
 }
