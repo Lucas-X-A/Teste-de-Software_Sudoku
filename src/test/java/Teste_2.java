@@ -6,7 +6,7 @@ public class Teste_2 {
 
     private static final String CAMINHO_VALIDO = "2_solucao1_sim.txt";
     private static final String CAMINHO_INVALIDO = "2_solucao1_nao.txt";
-    private static final String CAMINHO_INVALIDO_ULTIMA_COLUNA = "2_solucao2_nao.txt";
+    private static final String CAMINHO_INVALIDO_2 = "2_solucao2_nao.txt";
 
     // --- Testes para a classe G2_Sudoku_ok ---
 
@@ -27,7 +27,7 @@ public class Teste_2 {
     @Test
     @DisplayName("G2_Sudoku_ok: Deve retornar false para um Sudoku inválido (erro na última coluna)")
     void testeSudokuOkComSolucaoInvalidaUltimaColuna() {
-        G2_Sudoku_ok sudoku = new G2_Sudoku_ok(CAMINHO_INVALIDO_ULTIMA_COLUNA);
+        G2_Sudoku_ok sudoku = new G2_Sudoku_ok(CAMINHO_INVALIDO_2);
         assertFalse(sudoku.valido(), "Deveria retornar false para um tabuleiro com erro na última coluna.");
     }
 
@@ -51,7 +51,7 @@ public class Teste_2 {
     @Test
     @DisplayName("G2_Sudoku_nok: [FALHA ESPERADA] Deve retornar true para um Sudoku com erro apenas na última coluna")
     void testeSudokuNokComErroNaoDetectado() {
-        G2_Sudoku_nok sudoku = new G2_Sudoku_nok(CAMINHO_INVALIDO_ULTIMA_COLUNA);
+        G2_Sudoku_nok sudoku = new G2_Sudoku_nok(CAMINHO_INVALIDO_2);
         assertFalse(sudoku.valido(), "Este teste deve falhar para demonstrar o bug na validação da última coluna.");
     }
 }
