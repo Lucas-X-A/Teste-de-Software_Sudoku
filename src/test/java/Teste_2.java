@@ -45,13 +45,13 @@ public class Teste_2 {
     @DisplayName("G2_Sudoku_nok: Deve retornar false para um Sudoku inválido")
     void testeSudokuNokComSolucaoInvalida() {
         G2_Sudoku_nok sudoku = new G2_Sudoku_nok(CAMINHO_INVALIDO);
-        assertFalse(sudoku.valido(), "Deveria retornar false, pois o erro na primeira coluna é detectado.");
+        assertFalse(sudoku.valido(), "Deve retornar false.");
     }
 
     @Test
-    @DisplayName("G2_Sudoku_nok: Deve retornar true para um Sudoku com erro apenas na última coluna")
+    @DisplayName("G2_Sudoku_nok: Deve retornar true para um Sudoku com erro apenas na última coluna e linha")
     void testeSudokuNokComErroNaoDetectado() {
         G2_Sudoku_nok sudoku = new G2_Sudoku_nok(CAMINHO_INVALIDO_2);
-        assertFalse(sudoku.valido(), "Este teste deve falhar.");
+        assertTrue(sudoku.valido(), "Deveria retornar true, pois dá falso positivo.");
     }
 }
