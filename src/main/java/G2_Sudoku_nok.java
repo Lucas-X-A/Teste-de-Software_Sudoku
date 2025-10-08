@@ -6,7 +6,9 @@
  *  
  * Gerado com: Gemini 2.5 Pro
  * 
- * ERRO : A validação de colunas não verifica a última coluna (j < 8).
+ * ERROS: 
+ * 1. A validação de colunas não verifica a última coluna (j < 8).
+ * 2. A validação de sub-grades não verifica a última fileira de sub-grades (blockRow < 6).
  */
 
 import java.io.BufferedReader;
@@ -86,8 +88,9 @@ public class G2_Sudoku_nok {
             }
         }
 
-        // 3. Validar Sub-grades 3x3
-        for (int blockRow = 0; blockRow < 9; blockRow += 3) {
+        // 3. Validar Sub-grades 3x3 (COM ERRO INTENCIONAL)
+        // O loop vai até 6, ignorando a última fileira de sub-grades.
+        for (int blockRow = 0; blockRow < 6; blockRow += 3) {
             for (int blockCol = 0; blockCol < 9; blockCol += 3) {
                 int[] subgrid = new int[9];
                 int index = 0;
