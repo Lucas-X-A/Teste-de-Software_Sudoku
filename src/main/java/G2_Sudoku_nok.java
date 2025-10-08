@@ -7,8 +7,9 @@
  * Gerado com: Gemini 2.5 Pro
  * 
  * ERROS: 
- * 1. A validação de colunas não verifica a última coluna (j < 8).
- * 2. A validação de sub-grades não verifica a última fileira de sub-grades (blockRow < 6).
+ * 1. A validação de linhas não verifica a última linha (i < 8).
+ * 2. A validação de colunas não verifica a última coluna (j < 8).
+ * 3. A validação de sub-grades não verifica a última fileira de sub-grades (blockRow < 6).
  */
 
 import java.io.BufferedReader;
@@ -69,8 +70,9 @@ public class G2_Sudoku_nok {
      * @return true se o tabuleiro for válido, false caso contrário.
      */
     public boolean valido() {
-        // 1. Validar Linhas
-        for (int i = 0; i < 9; i++) {
+        // 1. Validar Linhas (COM ERRO INTENCIONAL)
+        // O loop vai até 8, ignorando a última linha.
+        for (int i = 0; i < 8; i++) {
             if (!isSetValid(board[i])) {
                 return false;
             }
